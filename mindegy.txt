@@ -1,0 +1,21 @@
+-install laravel:
+	parancssorban:
+	C:\xampp\htdocs\php ( <- kreálj egyet)
+	composer create-project laravel/laravel example.app
+	
+-artisan:
+	cd example-app
+	php artisan serve
+	
+-routing:
+	vs code editor használata
+	routes mappa:
+	web.php szerkesztése
+	resources/views/welcome.blade.php
+	https://laravel.com/docs/11.x/routing#the-default-route-files
+	=> doksi alapján
+	egyértelmű,
+	View Routes: a views mappában létrehozom az "about.blade.php" fájlt
+	Controller:
+	parancssorban: php artisan make:controller UserController
+	
