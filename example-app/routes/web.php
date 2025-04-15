@@ -14,7 +14,7 @@ Route::get('user/{id}', function ($id) {
     return 'User '.$id;
 });
 
-Route::redirect('/', '/greeting123');
+//Route::redirect('/', '/greeting123');
 
 Route::get('/about', function () {
     return view('about', ['name' => '123']);
