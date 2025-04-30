@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brands;
 use App\Models\Motors;
 use App\Http\Requests\StoreMotorsRequest;
 use App\Http\Requests\UpdateMotorsRequest;
+use Illuminate\Http\Request;
 
 class MotorsController extends Controller
 {
@@ -13,7 +15,8 @@ class MotorsController extends Controller
      */
     public function index()
     {
-        //
+        $motors = Motors::with('brand')->get();
+        return view('admin.motors.index', compact('motors'));
     }
 
     /**
@@ -21,7 +24,8 @@ class MotorsController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brands::all();
+        return view('admin.motors.create', compact('brands'));
     }
 
     /**
@@ -29,7 +33,17 @@ class MotorsController extends Controller
      */
     public function store(StoreMotorsRequest $request)
     {
-        //
+        $request->validate([
+            'brand_id' => 'required|exists:brands,id',
+            'model' => 'required',
+            'horsepower' => 'nullable|integer',
+            'price' => 'nullable|numeric',
+            'color' => 'nullable|integer',
+        ]);
+
+        Motors::create($request->all());
+
+        return redirect()->route('admin.motors.index')->with('success', 'Motorcycle added successfully');
     }
 
     /**
@@ -37,7 +51,7 @@ class MotorsController extends Controller
      */
     public function show(Motors $motors)
     {
-        //
+        return view('admin.motors.show', compact('motors'));
     }
 
     /**
@@ -45,7 +59,8 @@ class MotorsController extends Controller
      */
     public function edit(Motors $motors)
     {
-        //
+        $brands = Brands::all();
+        return view('admin.motors.edit', compact('motor', 'brands'));
     }
 
     /**
@@ -53,7 +68,8 @@ class MotorsController extends Controller
      */
     public function update(UpdateMotorsRequest $request, Motors $motors)
     {
-        //
+        $motors->update($request->all());
+        return redirect()->route('admin.motors.index')->with('success', 'Motorcycle updated successfully');
     }
 
     /**
@@ -61,6 +77,7 @@ class MotorsController extends Controller
      */
     public function destroy(Motors $motors)
     {
-        //
+        $motors->delete();
+        return redirect()->route('admin.motors.index')->with('success', 'Motorcycle deleted successfully');
     }
 }
