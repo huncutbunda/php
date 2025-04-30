@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Brands;
 use App\Models\Motors;
 use App\Http\Requests\StoreMotorsRequest;
@@ -81,3 +82,4 @@ class MotorsController extends Controller
         return redirect()->route('admin.motors.index')->with('success', 'Motorcycle deleted successfully');
     }
 }
+?>

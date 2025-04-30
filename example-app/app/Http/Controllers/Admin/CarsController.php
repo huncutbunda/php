@@ -82,3 +82,4 @@ class CarsController extends Controller
         return redirect()->route('admin.cars.index')->with('success', 'Car deleted successfully');
     }
 }
+?>

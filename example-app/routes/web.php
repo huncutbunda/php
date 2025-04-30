@@ -1,29 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CarsController;
+use App\Http\Controllers\Admin\MotorsController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::resource('cars', CarsController::class)->names('admin.cars');
+    Route::resource('motorcycles', MotorsController::class)->names('admin.motors');
 });
 
-Route::get('/greeting', function () {
-    return 'Hello World';
-})->name('greeting');
-
-Route::get('user/{id}', function ($id) {
-    return 'User '.$id;
-});
-
-//Route::redirect('/', '/greeting123');
-
-Route::get('/about', function () {
-    return view('about', ['name' => '123']);
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+?>
