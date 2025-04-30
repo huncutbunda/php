@@ -22,7 +22,7 @@ class CarController extends Controller
 
     public function show($id)
     {
-        return response()->json(Car::with('brand')->findOrFail($id));
+        return response()->json(Cars::with('brand')->findOrFail($id));
     }
 
     public function store(Request $request)
@@ -30,8 +30,9 @@ class CarController extends Controller
         $data = $request->validate([
             'brand_id' => 'required|exists:brands,id',
             'model_name' => 'required|string|max:255',
-            'year' => 'required|integer',
+            'horsepower' => 'required|integer',
             'price' => 'required|numeric',
+            'color' => 'required|string'
         ]);
 
         $car = Cars::create($data);
