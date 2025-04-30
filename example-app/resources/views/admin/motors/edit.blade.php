@@ -30,4 +30,3 @@
     <button type="submit">Update Motorcycle</button>
 </form>
 @endsection
-<vb>
