@@ -2,6 +2,7 @@
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\MotorcycleController;
 use App\Http\Controllers\Api\BrandController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('cars')->group(function () {
     Route::get('/', [CarController::class, 'index']);
